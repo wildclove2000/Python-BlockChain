@@ -51,12 +51,27 @@ def print_blockchain_elements():
 # tx_amount = get_user_input()
 # add_value(tx_amount)
 
+def verify_chain():
+    chain_verified = True
+    index = 0
+    print('blockchain:',blockchain)
+    for block in blockchain:
+        if index !=0:
+            print("index:{0}--- block[0]:{1} blockchain[{0} -1][0]:{2}".format(index,block[0],blockchain[index-1]))
+            if block[0] != blockchain[index - 1]:
+                chain_verified = False
+                break
+        index += 1
+
+    return chain_verified     
+
 
 def adding_transactions():
     while True:
         print('\n\nPlease choose')
         print('1: Add a new transaction value')
         print('2: Output the blockchain blocks')
+        print('h: Verify blockchain')
         print('Q: to Exit')
         user_choice = get_user_choice()
         if user_choice == '1':
@@ -67,6 +82,9 @@ def adding_transactions():
 
         elif user_choice == 'q':
             break
+        elif user_choice == 'h':
+            print ("Is it a valid blockchain? ",verify_chain()) 
+            
         else:
             print('Invalid value, try again!')
 
